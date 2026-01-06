@@ -1,1 +1,3 @@
-# Anoa-es_2.js
+Projeto logica em JavaScript de calculadora
+e botões programáveis
+dados: operações básicas, ...
