@@ -1,62 +1,64 @@
-// --- Funções Matemáticas ---
-function soma(a, b) {
-  return a + b;
+// --- 1. REGRAS (Lógica Direta) ---
+js
+const soma = (a, b) => a + b;
+const subtrai = (a, b) => a - b;
+const multiplica = (a, b) => a * b;
+const divide = (a, b) => a / b;
+
+// --- 2. MOTOR DE EXECUÇÃO ---
+function dvCalcular(operacaoLogica) {
+  // Captura os valores dos inputs
+  const n1 = Number(document.querySelector("#v1").value);
+  const n2 = Number(document.querySelector("#v2").value);
+  const campoResultado = document.querySelector("#res");
+
+  // Executa a lógica recebida e exibe o resultado
+  campoResultado.innerText = operacaoLogica(n1, n2);
 }
 
-function subtrai(a, b) {
-  return a - b;
+html
+<div class="calculadora">
+  <h3>Calculadora</h3>
+  
+  <input id="v1" type="number" placeholder="Valor 1">
+  <input id="v2" type="number" placeholder="Valor 2">
+  
+  <div class="botoes">
+    <button onclick="dvCalcular(soma)">+</button>
+    <button onclick="dvCalcular(subtrai)">-</button>
+    <button onclick="dvCalcular(multiplica)">*</button>
+    <button onclick="dvCalcular(divide)">/</button>
+  </div>
+  
+  <p>Resultado: <strong id="res">0</strong></p>
+</div>
+
+css
+.calculadora {
+  font-family: sans-serif;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: 250px;
+  background-color: #f9f9f9;
 }
 
-function multiplica(a, b) {
-  return a * b;
+input {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 5px;
 }
 
-function divide(a, b) {
-  return a / b;
+.botoes {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
 }
 
-// --- Interface (HTML via JS) ---
-document.write(`
- <div style="font-family: Verdana, sans-serif; padding: 20px; border: 1px solid #ccc; width: 300px;">
-  <h2>Calculadora</h2>
-  Valor 1: <input id="dvInput1" type="number" placeholder="0"><br><br>
-  Valor 2: <input id="dvInput2" type="number" placeholder="0"><br><br>
-  Operação:
-  <button type="button" onclick="dvCalcular(OPERACAO_SOMA)">+</button> 
-  <button type="button" onclick="dvCalcular(OPERACAO_SUBTRACAO)">-</button> 
-  <button type="button" onclick="dvCalcular(OPERACAO_MULTIPLICACAO)">*</button> 
-  <button type="button" onclick="dvCalcular(OPERACAO_DIVISAO)">/</button><br><br>
-  Resultado: <span id="dvResultadoCalculo" style="border: solid 1px #aaa; padding:3px; font-weight: bold;">0</span>
- </div>
-`);
-
-// --- Constantes para identificar as operações ---
-const OPERACAO_SOMA = 1;
-const OPERACAO_SUBTRACAO = 2;
-const OPERACAO_MULTIPLICACAO = 3;
-const OPERACAO_DIVISAO = 4;
-
-// --- Lógica de Controle ---
-function dvCalcular(dvOperacao) {
-  // Captura os valores dos inputs e converte para número
-  let dvValorOp1 = Number(document.querySelector("#dvInput1").value);
-  let dvValorOp2 = Number(document.querySelector("#dvInput2").value);
-  let dvResult = document.querySelector("#dvResultadoCalculo");
-
-  // O Switch decide qual função chamar dependendo do botão clicado
-  switch (dvOperacao) {
-    case OPERACAO_SOMA:
-      dvResult.innerHTML = soma(dvValorOp1, dvValorOp2);
-      break;
-    case OPERACAO_SUBTRACAO:
-      dvResult.innerHTML = subtrai(dvValorOp1, dvValorOp2);
-      break;
-    case OPERACAO_MULTIPLICACAO:
-      dvResult.innerHTML = multiplica(dvValorOp1, dvValorOp2);
-      break;
-    case OPERACAO_DIVISAO:
-      // Verificação simples para evitar divisão por zero
-      dvResult.innerHTML = dvValorOp2 !== 0 ? divide(dvValorOp1, dvValorOp2) : "Erro (div/0)";
-      break;
-  }
+button {
+  padding: 10px 15px;
+  cursor: pointer;
 }
+
+
+  
